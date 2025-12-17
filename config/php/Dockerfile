@@ -1,19 +1,31 @@
-FROM php:8.5-fpm-alpine 
+FROM php:8.4-fpm-bookworm
 
-
-RUN apk add --no-cache \
-    $PHPIZE_DEPS \
+# Instalamos dependencias del sistema (Debian usa apt-get)
+RUN apt-get update && apt-get install -y \
     libxml2-dev \
-    freetype-dev \
-    libjpeg-turbo-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
     libpng-dev \
-    icu-dev \
+    libicu-dev \
     libzip-dev \
-    # Compila y activa todas las extensiones en un solo paso
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Configurar e instalar extensiones (En Debian 8.4+, opcache ya viene incluido)
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
         gd \
-        pdo pdo_mysql mysqli \
+        pdo_mysql \
+        mysqli \
         intl \
-        opcache \
         zip
+
+# Activar Opcache
+RUN docker-php-ext-enable opcache
+
+# Configurar directorio de trabajo
+WORKDIR /var/www
+
+# IMPORTANTE: Cambiar el ID del usuario www-data para evitar problemas de permisos con el host
+# Esto hace que el usuario de PHP tenga permisos sobre los archivos montados
+RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
