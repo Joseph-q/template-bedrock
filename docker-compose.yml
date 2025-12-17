@@ -2,7 +2,6 @@ services:
   db:
     image: mariadb:latest
     container_name: "${COMPOSE_PROJECT_NAME}_db"
-    restart: always
     environment:
       MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
       MARIADB_DATABASE: ${DB_NAME}
