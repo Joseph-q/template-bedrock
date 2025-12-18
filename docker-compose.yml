@@ -9,6 +9,8 @@ services:
       MARIADB_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./barber_data:/var/lib/mysql
+    ports:
+      - 3306:3306
   
   php:
     container_name: "${COMPOSE_PROJECT_NAME}_php"

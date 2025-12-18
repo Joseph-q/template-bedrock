@@ -1,3 +1,103 @@
 @import "tailwindcss" theme(static);
 @source "../views/";
 @source "../../app/";
+
+@plugin "@tailwindcss/typography";
+
+
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter/Inter-Italic-VariableFont_opsz,wght.woff2') format('truetype-variations');
+    font-weight: 100 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter/Inter-VariableFont_opsz,wght.woff2') format('truetype-variations');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+/* Karantina Regular */
+@font-face {
+    font-family: 'Karantina';
+    src: url('../fonts/Karantina/Karantina-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Karantina Bold */
+@font-face {
+    font-family: 'Karantina';
+    src: url('../fonts/Karantina/Karantina-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Karantina Light */
+@font-face {
+    font-family: 'Karantina';
+    src: url('../fonts/Karantina/Karantina-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+@theme {
+    --color-dark: #050505;
+    --color-active: #977656;
+    --color-ligth-active: #F2DAC2;
+    --font-karantina: 'Karantina';
+}
+
+@theme {
+
+    /* Definir los keyframes */
+    @keyframes marquee {
+        from {
+            transform: translateX(0%);
+        }
+
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    /* Definir la utilidad de animación */
+    --animate-marquee: marquee 15s linear infinite;
+}
+
+:root {
+    --dark: #050505;
+    --active: #977656;
+    --ligth-active: #F2DAC2;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #050505;
+    color: white;
+}
+
+.hero-background {
+    /* La ruta de tu imagen */
+    background-image: url('../images/background.jpg');
+
+    /* Propiedades clave para que se vea profesional */
+    background-size: cover;
+    /* Ajusta la imagen para cubrir todo el espacio */
+    background-position: center;
+    /* Centra la imagen */
+    background-repeat: no-repeat;
+    /* Evita que la imagen se duplique */
+
+    /* Opcional: Añadir un filtro oscuro para que el texto resalte */
+    background-color: rgba(0, 0, 0, 0.1);
+    background-blend-mode: overlay;
+}
+
+a {
+    text-decoration: none;
+}
